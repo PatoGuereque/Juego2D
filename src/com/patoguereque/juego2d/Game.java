@@ -1,6 +1,7 @@
 package com.patoguereque.juego2d;
 
 import com.patoguereque.juego2d.gameobjects.player.Player;
+import com.patoguereque.juego2d.renderer.BackgroundRenderer;
 import com.patoguereque.juego2d.renderer.Display;
 
 import java.awt.*;
@@ -16,6 +17,7 @@ public class Game implements Runnable {
     private int height;
     private Thread thread;
 
+    private BackgroundRenderer backgroundRenderer;
     private Player player;
 
     private volatile boolean running;
@@ -32,6 +34,7 @@ public class Game implements Runnable {
         Assets.init();
         // player dimensions = 80w x 94h
         player = new Player(0, height - 100, 1, 80, 94, this);
+        backgroundRenderer = new BackgroundRenderer(this, player);
         display.getjFrame().addKeyListener(player.getMovementController());
     }
 
@@ -85,7 +88,7 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.drawImage(Assets.background, 0, 0, width, height, null);
+            backgroundRenderer.render(g);
             player.render(g);
             bs.show();
             g.dispose();

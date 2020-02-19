@@ -21,7 +21,7 @@ public class Player extends GameObject {
         this.width = width;
         this.height = height;
         this.game = game;
-        this.playerRenderer = new PlayerRenderer(this);
+        this.playerRenderer = new PlayerRenderer(game, this);
     }
 
     @Override
@@ -34,7 +34,6 @@ public class Player extends GameObject {
         movementController.tick();
         walking = false;
         if (movementController.up) {
-            System.out.println("UP");
             setY(getY() - 1);
             walking = true;
         }
@@ -56,11 +55,11 @@ public class Player extends GameObject {
             walking = true;
         }
 
-        if (getX() + 60 >= game.getWidth()) {
+        /*if (getX() + 60 >= game.getWidth()) {
             setX(game.getWidth() - 60);
         } else if (getX() <= -30) {
             setX(-30);
-        }
+        }*/
 
         if (getY() + 80 >= game.getHeight()) {
             setY(game.getHeight() - 80);
