@@ -1,6 +1,6 @@
 package com.patoguereque.juego2d;
 
-import com.patoguereque.juego2d.gameobjects.Player;
+import com.patoguereque.juego2d.gameobjects.player.Player;
 import com.patoguereque.juego2d.renderer.Display;
 
 import java.awt.*;
@@ -17,7 +17,6 @@ public class Game implements Runnable {
     private Thread thread;
 
     private Player player;
-    private KeyManager keyManager;
 
     private volatile boolean running;
 
@@ -26,15 +25,14 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         this.running = false;
-        this.keyManager = new KeyManager();
     }
 
     private void init() {
         this.display = new Display(title, width, height);
         Assets.init();
-        // player dimensions = 160 x 416
-        player = new Player(0, height - 100, 1, 100*160/416, 100, this);
-        display.getjFrame().addKeyListener(keyManager);
+        // player dimensions = 80w x 94h
+        player = new Player(0, height - 100, 1, 80, 94, this);
+        display.getjFrame().addKeyListener(player.getMovementController());
     }
 
     @Override
@@ -95,12 +93,7 @@ public class Game implements Runnable {
     }
 
     private void tick() {
-        keyManager.tick();
         player.tick();
-    }
-
-    public KeyManager getKeyManager() {
-        return keyManager;
     }
 
     public int getWidth() {

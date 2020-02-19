@@ -1,11 +1,11 @@
-package com.patoguereque.juego2d;
+package com.patoguereque.juego2d.gameobjects.player;
 
 import com.patoguereque.juego2d.util.Tickable;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyManager implements KeyListener, Tickable {
+public class PlayerMovementController implements KeyListener, Tickable {
 
     public boolean up, down, left, right;
 

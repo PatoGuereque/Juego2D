@@ -1,7 +1,7 @@
-package com.patoguereque.juego2d.gameobjects;
+package com.patoguereque.juego2d.gameobjects.player;
 
-import com.patoguereque.juego2d.Assets;
 import com.patoguereque.juego2d.Game;
+import com.patoguereque.juego2d.gameobjects.GameObject;
 
 import java.awt.*;
 
@@ -11,6 +11,9 @@ public class Player extends GameObject {
     private int width;
     private int height;
     private Game game;
+    private final PlayerRenderer playerRenderer;
+    private final PlayerMovementController movementController = new PlayerMovementController();
+    private boolean walking = false;
 
     public Player(int x, int y, int direction, int width, int height, Game game) {
         super(x, y);
@@ -18,29 +21,39 @@ public class Player extends GameObject {
         this.width = width;
         this.height = height;
         this.game = game;
+        this.playerRenderer = new PlayerRenderer(this);
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        playerRenderer.render(g);
     }
 
     @Override
     public void tick() {
-        if (game.getKeyManager().up) {
+        movementController.tick();
+        walking = false;
+        if (movementController.up) {
+            System.out.println("UP");
             setY(getY() - 1);
+            walking = true;
         }
 
-        if (game.getKeyManager().down) {
+        if (movementController.down) {
             setY(getY() + 1);
+            walking = true;
         }
 
-        if (game.getKeyManager().left) {
-            setX(getX() - 1);
+        if (movementController.left) {
+            direction = -1;
+            setX(getX() - 2);
+            walking = true;
         }
 
-        if (game.getKeyManager().right) {
-            setX(getX() + 1);
+        if (movementController.right) {
+            direction = 1;
+            setX(getX() + 2);
+            walking = true;
         }
 
         if (getX() + 60 >= game.getWidth()) {
@@ -70,5 +83,13 @@ public class Player extends GameObject {
 
     public Game getGame() {
         return game;
+    }
+
+    public PlayerMovementController getMovementController() {
+        return movementController;
+    }
+
+    public boolean isWalking() {
+        return walking;
     }
 }
