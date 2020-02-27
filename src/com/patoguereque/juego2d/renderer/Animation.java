@@ -10,11 +10,11 @@ public class Animation {
     private final BufferedImage[] frames;
     private int frame = 0;
 
-    public Animation(BufferedImage spriteSheet, int x, int y, int w, int h, int frameCount) {
+    public Animation(BufferedImage spriteSheet, int x, int y, int w, int h, int frameCount, int xOffset) {
         frames = new BufferedImage[frameCount];
 
         for (int i = 0; i < frameCount; i++) {
-            frames[i] = spriteSheet.getSubimage((x + i) * w, y * h, w, h);
+            frames[i] = spriteSheet.getSubimage((x + i) * w + i*xOffset + xOffset   , y * h, w, h);
         }
     }
 
@@ -32,6 +32,14 @@ public class Animation {
 
     public void nextFrame() {
         frame++;
+    }
+
+    public boolean isReset() {
+        return frame % frames.length == 0;
+    }
+
+    public boolean isLastFrame() {
+        return frame == frames.length - 1;
     }
 
     public void resetFrames() {

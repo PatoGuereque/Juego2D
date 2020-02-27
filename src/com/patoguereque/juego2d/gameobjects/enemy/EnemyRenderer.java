@@ -12,26 +12,21 @@ import java.awt.image.BufferedImage;
 public class EnemyRenderer {
 
     private final Game game;
-    private final Animation idleAnimation;
-    private final Animation runningAnimation;
     private final Enemy enemy;
     private int tick = 0;
 
     public EnemyRenderer(Game game, Enemy enemy) {
         this.game = game;
         this.enemy = enemy;
-
-        BufferedImage idleSpritesheet = ImageLoader.loadImage("/images/enemy/idle.png");
-        BufferedImage walkingSpritesheet = ImageLoader.loadImage("/images/enemy/walk.png");
-        idleAnimation = new Animation(idleSpritesheet, 0, 0, 200, 308, 6);
-        runningAnimation = new Animation(walkingSpritesheet, 0, 0, 200, 308, 10);
     }
 
     public BufferedImage getDrawnImage() {
         tick++;
-        Animation animation = (enemy.isWalking() ? runningAnimation : idleAnimation);
+        //Animation animation = (enemy.isWalking() ? EnemyState.WALKING : EnemyState.IDLING).getAnimation();
+        //Animation animation = (enemy.isWalking() ? EnemyState.ATTACKING : EnemyState.APPEARING).getAnimation();
+        Animation animation = enemy.getEnemyState().getAnimation();
 
-        if (tick % 6 == 0) {
+        if (tick % enemy.getEnemyState().getAnimationSpeed() == 0) {
             animation.nextFrame();
         }
         return animation.getFrame();

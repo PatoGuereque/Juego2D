@@ -67,7 +67,7 @@ public class Player extends GameObject implements Collideable {
         if (movementController.space) {
             if (!shooting) {
                 shooting = true;
-                game.getGameObjects().add(new Bullet(x + (direction == 1 ? getWidth() - 10 : 0), y + 3, direction));
+                game.getGameObjects().add(new Bullet(game, x + (direction == 1 ? getWidth() - 10 : 0), y + 3, direction));
             }
         } else {
             shooting = false;

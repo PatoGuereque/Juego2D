@@ -41,7 +41,7 @@ public class CameraFrame {
         t.scale(width/image.getWidth(), height/image.getHeight()); // scale = 1
         graphics.drawImage(image, t, null);
 
-        //graphics.drawRect((int)(gameObject.getX() - this.frameX), (int)y, gameObject.getWidth(), gameObject.getHeight());
+        graphics.drawRect((int)(gameObject.getX() - this.frameX), (int)y, gameObject.getWidth(), gameObject.getHeight());
 
         //        graphics.drawImage(image, x, y, width, gameObject.getHeight(), null);
     }
