@@ -11,6 +11,7 @@ public abstract class GameObject implements IGameObject {
     protected final int width;
     protected final int height;
     protected int direction;
+    protected boolean dead = false;
 
     public GameObject(double x, double y, int width, int height) {
         this.x = x;
@@ -53,5 +54,10 @@ public abstract class GameObject implements IGameObject {
 
     public int getDirection() {
         return direction;
+    }
+
+    @Override
+    public boolean isDead() {
+        return dead;
     }
 }

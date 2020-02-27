@@ -3,6 +3,10 @@ package com.patoguereque.juego2d.gameobjects;
 public interface Collideable extends IGameObject {
 
     default boolean collide(Collideable collideable) {
+        if (isDead() || collideable.isDead()) {
+            return false;
+        }
+
         int thisWidth = this.getWidth();
         int thisHeight = this.getHeight();
         int otherWidth = collideable.getWidth();

@@ -15,4 +15,6 @@ public interface IGameObject extends Tickable {
     void setX(double x);
 
     void setY(double y);
+
+    boolean isDead();
 }

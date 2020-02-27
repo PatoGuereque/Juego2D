@@ -113,10 +113,11 @@ public class Enemy extends GameObject implements Collideable, Damageable {
 
     @Override
     public void kill() {
-        if (enemyState == EnemyState.DEAD || enemyState == EnemyState.DYING) {
+        if (dead) {
             return;
         }
 
+        dead = true;
         setEnemyState(EnemyState.DYING);
     }
 }

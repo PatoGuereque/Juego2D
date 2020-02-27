@@ -35,7 +35,7 @@ public enum EnemyState {
         this.width = width;
     }
 
-        public Animation getAnimation() {
+    public Animation getAnimation() {
         return animation;
     }
 
