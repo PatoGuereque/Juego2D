@@ -18,6 +18,14 @@ public class Animation {
         }
     }
 
+    public Animation(BufferedImage spriteSheet, int y, int w, int h, int frameCount) {
+        frames = new BufferedImage[frameCount];
+
+        for (int i = 0; i < frameCount; i++) {
+            frames[i] = spriteSheet.getSubimage((i) * w + i*10 + 5, y, w, h);
+        }
+    }
+
     public BufferedImage getFrame() {
         return frames[frame % frames.length];
     }

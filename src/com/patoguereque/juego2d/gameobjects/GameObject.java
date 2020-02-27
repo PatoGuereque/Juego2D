@@ -12,7 +12,7 @@ public abstract class GameObject implements IGameObject {
     protected final int height;
     protected int direction;
 
-    public GameObject(int x, int y, int width, int height) {
+    public GameObject(double x, double y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;

@@ -23,8 +23,8 @@ public class PlayerRenderer {
         this.player = player;
 
         BufferedImage spritesheet = ImageLoader.loadImage("/images/player/hero_spritesheet.png");
-        idleAnimation = new Animation(spritesheet, 0, 0, player.getWidth(), player.getHeight(), 8);
-        runningAnimation = new Animation(spritesheet, 0, 1, player.getWidth(), player.getHeight(), 6);
+        idleAnimation = new Animation(spritesheet, 18, 70, 65, 8);
+        runningAnimation = new Animation(spritesheet, 32+65+18, 70, 65, 6);
     }
 
     public void render(CameraFrame camera) {

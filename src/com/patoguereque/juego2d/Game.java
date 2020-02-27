@@ -14,6 +14,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game extends JComponent implements Runnable {
 
@@ -29,7 +30,7 @@ public class Game extends JComponent implements Runnable {
     private Camera camera;
     private Player player;
     private Enemy enemy;
-    private final List<GameObject> gameObjects = new ArrayList<>();
+    private final List<GameObject> gameObjects = new CopyOnWriteArrayList<>();
 
     private volatile boolean running;
 
@@ -50,7 +51,7 @@ public class Game extends JComponent implements Runnable {
     private void init() {
         Assets.init();
         // player dimensions = 80w x 94h
-        player = new Player(0, height - 100, 1, 80, 94, this);
+        player = new Player(0, height - 100, 1, this);
         enemy = new Enemy(width - 300, height - 100, this, player);
         backgroundRenderer = new BackgroundRenderer(this, player);
         camera = new Camera(this, player);
@@ -129,8 +130,7 @@ public class Game extends JComponent implements Runnable {
     }
 
     private void tick() {
-        player.tick();
-        enemy.tick();
+        gameObjects.forEach(GameObject::tick);
     }
 
     public int getWidth() {

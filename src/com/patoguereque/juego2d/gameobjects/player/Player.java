@@ -3,6 +3,7 @@ package com.patoguereque.juego2d.gameobjects.player;
 import com.patoguereque.juego2d.Game;
 import com.patoguereque.juego2d.gameobjects.Collideable;
 import com.patoguereque.juego2d.gameobjects.GameObject;
+import com.patoguereque.juego2d.gameobjects.bullet.Bullet;
 import com.patoguereque.juego2d.renderer.CameraFrame;
 
 import java.awt.*;
@@ -15,8 +16,8 @@ public class Player extends GameObject implements Collideable {
     private final PlayerMovementController movementController = new PlayerMovementController();
     private boolean walking = false;
 
-    public Player(int x, int y, int direction, int width, int height, Game game) {
-        super(x, y, width, height);
+    public Player(int x, int y, int direction, Game game) {
+        super(x, y, 70, 65);
         this.direction = direction;
         this.game = game;
         this.playerRenderer = new PlayerRenderer(game, this);
@@ -31,6 +32,8 @@ public class Player extends GameObject implements Collideable {
     private double maxVelocity = 2.5;
     private double acceleration = 0.3;
     private double deceleration = 0.8;
+    private boolean shooting = false;
+
     @Override
     public void tick() {
         movementController.tick();
@@ -59,6 +62,15 @@ public class Player extends GameObject implements Collideable {
         } else {
             velocity -= deceleration;
             velocity = Math.max(velocity, 0);
+        }
+
+        if (movementController.space) {
+            if (!shooting) {
+                shooting = true;
+                game.getGameObjects().add(new Bullet(x + (direction == 1 ? getWidth() - 10 : 0), y + 3, direction));
+            }
+        } else {
+            shooting = false;
         }
 
         if (velocity == 0) {

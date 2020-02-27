@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class PlayerMovementController implements KeyListener, Tickable {
 
-    public boolean up, down, left, right;
+    public boolean up, down, left, right, space;
 
     private final boolean[] keys = new boolean[256];
 
@@ -30,5 +30,6 @@ public class PlayerMovementController implements KeyListener, Tickable {
         down = keys[KeyEvent.VK_DOWN];
         left = keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_RIGHT];
+        space = keys[KeyEvent.VK_SPACE];
     }
 }

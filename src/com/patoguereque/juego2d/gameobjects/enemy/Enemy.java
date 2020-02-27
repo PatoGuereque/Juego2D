@@ -15,7 +15,7 @@ public class Enemy extends GameObject implements Collideable {
     private final EnemyRenderer enemyRenderer;
 
     public Enemy(int x, int y, Game game, Player player) {
-        super(x, y, (94*200)/308, 94);
+        super(x, y, (85*200)/308, 85);
         this.player = player;
         this.enemyRenderer = new EnemyRenderer(game, this);
     }
