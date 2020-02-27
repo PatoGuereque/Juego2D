@@ -2,13 +2,15 @@ package com.patoguereque.juego2d.gameobjects.player;
 
 import com.patoguereque.juego2d.Game;
 import com.patoguereque.juego2d.renderer.Animation;
+import com.patoguereque.juego2d.renderer.Camera;
+import com.patoguereque.juego2d.renderer.CameraFrame;
 import com.patoguereque.juego2d.util.ImageLoader;
 import com.patoguereque.juego2d.util.Renderable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class PlayerRenderer implements Renderable {
+public class PlayerRenderer {
 
     private final Game game;
     private final Animation idleAnimation;
@@ -25,30 +27,20 @@ public class PlayerRenderer implements Renderable {
         runningAnimation = new Animation(spritesheet, 0, 1, player.getWidth(), player.getHeight(), 6);
     }
 
-    @Override
-    public void render(Graphics g) {
+    public void render(CameraFrame camera) {
         tick++;
-        int x = player.getX();
-        int y = player.getY();
-        int width = player.getWidth();
-        int height = player.getHeight();
         Animation animation = (player.isWalking() ? runningAnimation : idleAnimation);
 
-        if (x > game.getWidth() - 50) {
-            x = game.getWidth() - 50;
-        } else if(x < 50) {
-            x = 50;
+        if (player.isWalking()) {
+            if (tick % 4 == 0) {
+                animation.nextFrame();
+            }
+        } else {
+            if (tick % 6 == 0) {
+                animation.nextFrame();
+            }
         }
 
-        if (player.getDirection() == -1) {
-            x += width;
-            width *= -1;
-        }
-
-        if (tick % 6 == 0) {
-            animation.nextFrame();
-        }
-
-        g.drawImage(animation.getFrame(), x, y, width, height, null);
+        camera.render(player, animation.getFrame());
     }
 }

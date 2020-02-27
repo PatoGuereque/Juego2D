@@ -24,22 +24,22 @@ public class BackgroundRenderer implements Renderable {
 
     public BackgroundRenderer(Game game, Player player) {
         this.game = game;
-        ground = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_01_ground.png"));
-        treesAndBushes = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_02_trees and bushes.png"));
-        distantTrees = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_03_distant_trees.png"));
-        bushes = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_04_bushes.png"));
-        hill1 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_05_hill1.png"));
-        hill2 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_06_hill2.png"));
-        hugeClouds = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_07_huge_clouds.png"));
-        clouds = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_08_clouds.png"));
-        distantClouds1 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_09_distant_clouds1.png"));
-        distantClouds2 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_10_distant_clouds.png"));
-        background = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_11_background.png"));
+        ground = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_01_ground.png"), 1);
+        treesAndBushes = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_02_trees and bushes.png"), 1);
+        distantTrees = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_03_distant_trees.png"), 0.5);
+        bushes = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_04_bushes.png"), 0.5);
+        hill1 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_05_hill1.png"), 0.2);
+        hill2 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_06_hill2.png"), 0.1);
+        hugeClouds = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_07_huge_clouds.png"), 0.1);
+        clouds = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_08_clouds.png"), 0.3);
+        distantClouds1 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_09_distant_clouds1.png"), 0.2);
+        distantClouds2 = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_10_distant_clouds.png"), 0.1);
+        background = new BackgroundPart(game, player, ImageLoader.loadImage("/images/background/_11_background.png"), 0);
     }
 
     int tick = 0;
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g) {
         tick++;
         if (tick % 3 == 0) {
             clouds.move(1);

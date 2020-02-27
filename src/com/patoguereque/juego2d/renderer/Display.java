@@ -1,5 +1,7 @@
 package com.patoguereque.juego2d.renderer;
 
+import com.patoguereque.juego2d.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,14 +13,14 @@ public class Display {
     private final int width;
     private final int height;
 
-    public Display(String title, int width, int height) {
+    public Display(Game game, String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
-        createDisplay();
+        createDisplay(game);
     }
 
-    private void createDisplay() {
+    private void createDisplay(Game game) {
         jFrame = new JFrame(title);
 
         jFrame.setSize(width, height);
@@ -27,12 +29,12 @@ public class Display {
         jFrame.setVisible(true);
 
         Dimension screenDimensions = new Dimension(width, height);
-        canvas = new Canvas();
-        canvas.setPreferredSize(screenDimensions);
-        canvas.setMaximumSize(screenDimensions);
-        canvas.setPreferredSize(screenDimensions);
+        //canvas = new Canvas();
+        game.setPreferredSize(screenDimensions);
+        game.setMaximumSize(screenDimensions);
+        game.setPreferredSize(screenDimensions);
 
-        jFrame.add(canvas);
+        jFrame.add(game);
         jFrame.pack();
     }
 

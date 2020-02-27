@@ -1,31 +1,57 @@
 package com.patoguereque.juego2d.gameobjects;
 
-import com.patoguereque.juego2d.util.Renderable;
-import com.patoguereque.juego2d.util.Tickable;
+import com.patoguereque.juego2d.renderer.CameraFrame;
 
-public abstract class GameObject implements Tickable, Renderable {
+import java.awt.image.BufferedImage;
 
-    protected int x;
-    protected int y;
+public abstract class GameObject implements IGameObject {
 
-    public GameObject(int x, int y) {
+    protected double x;
+    protected double y;
+    protected final int width;
+    protected final int height;
+    protected int direction;
+
+    public GameObject(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
-    public int getX() {
+    @Override
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    @Override
+    public double getY() {
         return y;
     }
 
-    public void setX(int x) {
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    @Override
+    public void setY(double y) {
         this.y = y;
+    }
+
+    public abstract void render(CameraFrame cameraFrame);
+
+    public int getDirection() {
+        return direction;
     }
 }
